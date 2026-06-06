@@ -10,6 +10,7 @@ const NAV = [
   { path: '/subjects', label: 'Subjects', icon: 'layers' },
   { path: '/notes', label: 'Notes', icon: 'notes' },
   { path: '/flashcards', label: 'Flashcards', icon: 'cards' },
+  { path: '/lessons', label: 'Lessons', icon: 'book' },
   { path: '/tasks', label: 'Tasks', icon: 'tasks' },
   { path: '/schedule', label: 'Schedule', icon: 'schedule' },
   { path: '/planner', label: 'Smart Planner', icon: 'sparkles' },

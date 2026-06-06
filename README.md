@@ -70,7 +70,8 @@ The `mobile/` folder wraps the app with [Capacitor](https://capacitorjs.com/) to
 2. Download the **learnio-debug-apk** artifact when it finishes
 3. Install `app-debug.apk` on your phone
 
-See [`mobile/README.md`](mobile/README.md) for local build instructions.
+Prefer to build it yourself on your computer? Follow the step-by-step
+[**BUILD_APK.md**](BUILD_APK.md) guide. See also [`mobile/README.md`](mobile/README.md).
 
 ## Roadmap (v2 ideas)
 

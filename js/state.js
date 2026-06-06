@@ -12,6 +12,7 @@ const defaultData = () => ({
   tasks: [],
   scheduleEvents: [],
   studySessions: [],
+  lessons: [],
   settings: {
     theme: 'system',
     userName: '',
@@ -59,7 +60,7 @@ export function update(mutator) {
   // Mutator gets a draft copy; we shallow clone collections that change
   const next = { ...data };
   // Clone collections so reducers can mutate freely
-  for (const key of ['subjects', 'notes', 'decks', 'cards', 'tasks', 'scheduleEvents', 'studySessions']) {
+  for (const key of ['subjects', 'notes', 'decks', 'cards', 'tasks', 'scheduleEvents', 'studySessions', 'lessons']) {
     next[key] = [...data[key]];
   }
   next.settings = { ...data.settings, pomodoro: { ...data.settings.pomodoro }, planner: { ...data.settings.planner } };

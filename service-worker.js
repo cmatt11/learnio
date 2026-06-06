@@ -1,7 +1,7 @@
 /* Learnio service worker - offline support via precache + runtime caching.
  * Bump CACHE_VERSION whenever app shell files change to force an update. */
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const SHELL_CACHE = `learnio-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `learnio-runtime-${CACHE_VERSION}`;
 
@@ -19,6 +19,8 @@ const SHELL_ASSETS = [
   './js/state.js',
   './js/utils.js',
   './js/markdown.js',
+  './js/lessons-engine.js',
+  './js/lib/idb.js',
   './js/components/icons.js',
   './js/components/layout.js',
   './js/components/modal.js',
@@ -30,6 +32,7 @@ const SHELL_ASSETS = [
   './js/views/tasks.js',
   './js/views/schedule.js',
   './js/views/planner.js',
+  './js/views/lessons.js',
   './js/views/pomodoro.js',
   './js/views/stats.js',
   './js/views/settings.js',

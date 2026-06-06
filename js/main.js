@@ -13,6 +13,7 @@ import { renderFlashcards, renderDeck, renderStudy } from './views/flashcards.js
 import { renderTasks } from './views/tasks.js';
 import { renderSchedule } from './views/schedule.js';
 import { renderPlanner } from './views/planner.js';
+import { renderLessons, renderLessonDetail } from './views/lessons.js';
 import { renderPomodoro } from './views/pomodoro.js';
 import { renderStats } from './views/stats.js';
 import { renderSettings } from './views/settings.js';
@@ -53,6 +54,8 @@ route('/flashcards/:id/study', ({ params }) => mountView(renderStudy(params.id))
 route('/tasks', () => mountView(renderTasks()));
 route('/schedule', () => mountView(renderSchedule()));
 route('/planner', () => mountView(renderPlanner()));
+route('/lessons', () => mountView(renderLessons()));
+route('/lessons/:id', ({ params }) => mountView(renderLessonDetail(params.id)));
 route('/pomodoro', () => mountView(renderPomodoro()));
 route('/stats', () => mountView(renderStats()));
 route('/settings', () => mountView(renderSettings()));

@@ -74,3 +74,28 @@ subscribe(() => {
 });
 
 start();
+
+// --- PWA: service worker registration + install prompt -----------------------
+// Register only on real web origins, and never inside the Capacitor Android
+// WebView (where assets are already bundled locally and Capacitor is present).
+const isCapacitor = typeof window !== 'undefined' && 'Capacitor' in window;
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol) && !isCapacitor) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch((err) => {
+      console.warn('Service worker registration failed:', err);
+    });
+  });
+}
+
+// Capture the install prompt so Settings can offer an "Install app" button.
+window.__learnioInstall = { prompt: null, installed: false };
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  window.__learnioInstall.prompt = e;
+  window.dispatchEvent(new CustomEvent('learnio:installready'));
+});
+window.addEventListener('appinstalled', () => {
+  window.__learnioInstall.prompt = null;
+  window.__learnioInstall.installed = true;
+  window.dispatchEvent(new CustomEvent('learnio:installed'));
+});

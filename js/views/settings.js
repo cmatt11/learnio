@@ -10,6 +10,17 @@ export function renderSettings() {
 
   const content = `
     <div class="px-4 md:px-8 py-6 max-w-3xl mx-auto space-y-6">
+      <section id="install-card" class="card p-5 hidden">
+        <h3 class="font-semibold mb-2 flex items-center gap-2">${icon('download', { size: 18 })} Install app</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+          Install Learnio on your device for a full-screen, app-like experience that works offline. All your data stays on your device.
+        </p>
+        <button id="install-btn" class="btn btn-primary">${icon('download', { size: 16 })} Install Learnio</button>
+        <p id="install-hint" class="text-xs text-slate-400 mt-3 hidden">
+          On iPhone/iPad: tap the <strong>Share</strong> button, then <strong>Add to Home Screen</strong>.
+        </p>
+      </section>
+
       <section class="card p-5">
         <h3 class="font-semibold mb-4">Appearance</h3>
         <div class="grid grid-cols-3 gap-2">
@@ -40,7 +51,7 @@ export function renderSettings() {
         <p class="text-sm text-slate-500 dark:text-slate-400">
           <strong>Learnio v1</strong> — Your all-in-one learning ecosystem.
         </p>
-        <p class="text-xs text-slate-400 mt-2">Notes, flashcards, tasks, schedule, pomodoro — everything you need to study smarter.</p>
+        <p class="text-xs text-slate-400 mt-2">Notes, flashcards, tasks, schedule, smart planner, pomodoro — everything you need to study smarter. Works offline and stores all data on your device.</p>
       </section>
     </div>
   `;
@@ -49,6 +60,39 @@ export function renderSettings() {
     title: 'Settings',
     content,
     onMount: (root) => {
+      // Install (PWA) handling
+      const installCard = root.querySelector('#install-card');
+      const installBtn = root.querySelector('#install-btn');
+      const installHint = root.querySelector('#install-hint');
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      const installState = window.__learnioInstall || { prompt: null, installed: false };
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+      if (!isStandalone) {
+        if (installState.prompt) {
+          installCard.classList.remove('hidden');
+        } else if (isIOS) {
+          // iOS has no programmatic prompt - show manual instructions.
+          installCard.classList.remove('hidden');
+          installBtn.classList.add('hidden');
+          installHint.classList.remove('hidden');
+        }
+      }
+
+      installBtn?.addEventListener('click', async () => {
+        const p = window.__learnioInstall?.prompt;
+        if (!p) { toast('Install not available right now', { type: 'error' }); return; }
+        p.prompt();
+        try {
+          const { outcome } = await p.userChoice;
+          if (outcome === 'accepted') toast('Installing Learnio…', { type: 'success' });
+        } catch (e) {}
+        window.__learnioInstall.prompt = null;
+        installCard.classList.add('hidden');
+      });
+
+      window.addEventListener('learnio:installready', () => installCard?.classList.remove('hidden'), { once: true });
+
       root.querySelectorAll('.theme-option').forEach((b) => b.addEventListener('click', () => {
         const t = b.dataset.theme;
         update((d) => { d.settings.theme = t; });

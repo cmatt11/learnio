@@ -5,18 +5,20 @@ This folder packages the Learnio web app into a native Android APK using
 APK, so the installed app works fully offline and stores all data locally on the
 device (via the WebView's `localStorage`).
 
-## Easiest way: build in the cloud (no setup)
+## Easiest way: download from Releases (no setup)
 
-A GitHub Actions workflow builds the APK for you:
+Every time the app changes on `main` (or you run the workflow manually), GitHub
+Actions builds the APK and publishes it to the repo's **Releases** page:
 
-1. Go to the repo's **Actions** tab on GitHub.
-2. Select **Build Android APK** → **Run workflow**.
-3. When it finishes, download the **learnio-debug-apk** artifact.
-4. Copy `app-debug.apk` to your phone and install it (you may need to allow
-   "Install unknown apps" for your browser/file manager).
+1. Open the repo on GitHub → **Releases** (right sidebar), or go to
+   `https://github.com/cmatt11/learnio/releases`.
+2. Open **"Learnio Android (latest build)"**.
+3. Download **`learnio.apk`** under *Assets* and install it on your phone
+   (you may need to allow "Install unknown apps" for your browser/file manager).
 
-Pushing a tag like `v1.0.0` also builds the APK and attaches it to a GitHub
-Release automatically.
+You can also trigger a build on demand: **Actions** tab → **Build Android APK**
+→ **Run workflow**. Tagging a commit `vX.Y.Z` creates a permanent named release
+with the APK attached.
 
 ## Build locally
 

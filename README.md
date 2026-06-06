@@ -64,11 +64,12 @@ Once installed it launches full-screen, works **offline**, and stores all data l
 
 ### As an Android APK (Capacitor)
 
-The `mobile/` folder wraps the app with [Capacitor](https://capacitorjs.com/) to produce a real `.apk` that bundles everything for full offline use. The easiest way is the included GitHub Actions workflow:
+The `mobile/` folder wraps the app with [Capacitor](https://capacitorjs.com/) to produce a real `.apk` that bundles everything for full offline use. A GitHub Actions workflow builds it for you and **attaches `learnio.apk` to the repo's Releases page**:
 
-1. GitHub repo → **Actions** tab → **Build Android APK** → **Run workflow**
-2. Download the **learnio-debug-apk** artifact when it finishes
-3. Install `app-debug.apk` on your phone
+1. Open the repo → **Releases** (or `/releases`) → **"Learnio Android (latest build)"**
+2. Download **`learnio.apk`** from *Assets* and install it on your phone
+
+To rebuild on demand: **Actions** tab → **Build Android APK** → **Run workflow**. It also rebuilds automatically whenever the app changes on `main`.
 
 See [`mobile/README.md`](mobile/README.md) for local build instructions.
 

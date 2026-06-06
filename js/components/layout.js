@@ -12,6 +12,7 @@ const NAV = [
   { path: '/flashcards', label: 'Flashcards', icon: 'cards' },
   { path: '/tasks', label: 'Tasks', icon: 'tasks' },
   { path: '/schedule', label: 'Schedule', icon: 'schedule' },
+  { path: '/planner', label: 'Smart Planner', icon: 'sparkles' },
   { path: '/pomodoro', label: 'Pomodoro', icon: 'timer' },
   { path: '/stats', label: 'Stats', icon: 'chart' },
 ];

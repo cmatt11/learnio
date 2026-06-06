@@ -32,6 +32,7 @@ const icons = {
   flag: '<path d="M4 21V4M4 4l13 0c1 0 1.5.5 1.5 1.5L17 9l1.5 3.5c0 1-.5 1.5-1.5 1.5H4"/>',
   star: '<polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9"/>',
   graduation_cap: '<path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/>',
+  sparkles: '<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3z"/><path d="M19 14l.9 2.3 2.3.9-2.3.9L19 20.4l-.9-2.3-2.3-.9 2.3-.9L19 14z"/>',
 };
 
 export function icon(name, opts = {}) {

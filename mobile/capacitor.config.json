@@ -1,0 +1,11 @@
+{
+  "appId": "dev.learnio.app",
+  "appName": "Learnio",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

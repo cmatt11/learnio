@@ -17,6 +17,7 @@ const defaultData = () => ({
     userName: '',
     namePrompted: false,
     pomodoro: { work: 25, shortBreak: 5, longBreak: 15, longBreakInterval: 4 },
+    planner: { dayStart: '08:00', dayEnd: '21:00', breakEvery: 90, breakLen: 15, defaultDuration: 45 },
     onboarded: false,
   },
 });
@@ -61,7 +62,7 @@ export function update(mutator) {
   for (const key of ['subjects', 'notes', 'decks', 'cards', 'tasks', 'scheduleEvents', 'studySessions']) {
     next[key] = [...data[key]];
   }
-  next.settings = { ...data.settings, pomodoro: { ...data.settings.pomodoro } };
+  next.settings = { ...data.settings, pomodoro: { ...data.settings.pomodoro }, planner: { ...data.settings.planner } };
   mutator(next);
   data = next;
   save(data);

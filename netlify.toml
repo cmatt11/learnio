@@ -1,0 +1,18 @@
+# Learnio is a static, zero-build site. This config keeps Netlify from
+# attempting a build and publishes the repo root as-is.
+[build]
+  publish = "."
+  command = ""
+
+# Correct MIME type for the web app manifest.
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+# Allow the service worker to control the whole site scope.
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Service-Worker-Allowed = "/"

@@ -213,3 +213,13 @@ html, body { height: 100%; }
   .sidebar { transform: translateX(-100%); transition: transform 0.2s; }
   .sidebar.open { transform: translateX(0); }
 }
+
+
+/* Print - clean schedule output only */
+@media print {
+  body { background: white !important; color: black !important; }
+  aside.sidebar, header, #sidebar-backdrop, .no-print { display: none !important; }
+  main { display: block !important; }
+  .card { border: 1px solid #ddd !important; box-shadow: none !important; page-break-inside: avoid; background: white !important; }
+  .fade-in { animation: none !important; }
+}

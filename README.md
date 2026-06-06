@@ -48,12 +48,36 @@ This is a fully static site, deploy to anywhere:
 - **Vercel** / **Netlify** — drag-and-drop or connect the repo
 - **Any static host** — just upload the files
 
+## Install as an app
+
+Learnio is a **PWA (Progressive Web App)** and can also be packaged as a native **Android APK**.
+
+### On your phone / desktop (PWA — no build needed)
+
+Open the deployed site and install it:
+
+- **Android (Chrome):** open the menu (⋮) → **Add to Home screen / Install app**, or use **Settings → Install Learnio** inside the app.
+- **iPhone/iPad (Safari):** tap **Share** → **Add to Home Screen**.
+- **Desktop (Chrome/Edge):** click the install icon in the address bar.
+
+Once installed it launches full-screen, works **offline**, and stores all data locally on your device.
+
+### As an Android APK (Capacitor)
+
+The `mobile/` folder wraps the app with [Capacitor](https://capacitorjs.com/) to produce a real `.apk` that bundles everything for full offline use. The easiest way is the included GitHub Actions workflow:
+
+1. GitHub repo → **Actions** tab → **Build Android APK** → **Run workflow**
+2. Download the **learnio-debug-apk** artifact when it finishes
+3. Install `app-debug.apk` on your phone
+
+See [`mobile/README.md`](mobile/README.md) for local build instructions.
+
 ## Roadmap (v2 ideas)
 
 - Cloud sync (Supabase) and multi-device support
 - AI features: auto-flashcards from notes, summaries, Q&A tutor
 - LaTeX/math equation rendering in notes
-- Mobile PWA install
+- Bundle Tailwind locally for 100%-offline-from-first-launch
 - Collaboration: shared decks and study groups
 - Calendar integration
 - Grade tracker / GPA calculator

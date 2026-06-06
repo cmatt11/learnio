@@ -12,6 +12,7 @@ import { renderNotes, renderNoteEditor } from './views/notes.js';
 import { renderFlashcards, renderDeck, renderStudy } from './views/flashcards.js';
 import { renderTasks } from './views/tasks.js';
 import { renderSchedule } from './views/schedule.js';
+import { renderPlanner } from './views/planner.js';
 import { renderPomodoro } from './views/pomodoro.js';
 import { renderStats } from './views/stats.js';
 import { renderSettings } from './views/settings.js';
@@ -51,6 +52,7 @@ route('/flashcards/:id', ({ params }) => mountView(renderDeck(params.id)));
 route('/flashcards/:id/study', ({ params }) => mountView(renderStudy(params.id)));
 route('/tasks', () => mountView(renderTasks()));
 route('/schedule', () => mountView(renderSchedule()));
+route('/planner', () => mountView(renderPlanner()));
 route('/pomodoro', () => mountView(renderPomodoro()));
 route('/stats', () => mountView(renderStats()));
 route('/settings', () => mountView(renderSettings()));
@@ -74,6 +76,31 @@ subscribe(() => {
 });
 
 start();
+
+// --- PWA: service worker registration + install prompt -----------------------
+// Register only on real web origins, and never inside the Capacitor Android
+// WebView (where assets are already bundled locally and Capacitor is present).
+const isCapacitor = typeof window !== 'undefined' && 'Capacitor' in window;
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol) && !isCapacitor) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch((err) => {
+      console.warn('Service worker registration failed:', err);
+    });
+  });
+}
+
+// Capture the install prompt so Settings can offer an "Install app" button.
+window.__learnioInstall = { prompt: null, installed: false };
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  window.__learnioInstall.prompt = e;
+  window.dispatchEvent(new CustomEvent('learnio:installready'));
+});
+window.addEventListener('appinstalled', () => {
+  window.__learnioInstall.prompt = null;
+  window.__learnioInstall.installed = true;
+  window.dispatchEvent(new CustomEvent('learnio:installed'));
+});
 
 // First-run: ask the learner's name so greetings can be personalized.
 function maybePromptForName() {

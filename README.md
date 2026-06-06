@@ -1,88 +1,125 @@
-# Learnio
+<div align="center">
 
-> Your all-in-one learning ecosystem for high school and college students.
+# 🎓 Learnio
 
-Learnio brings together everything you need to study smarter — notes, flashcards with spaced repetition, tasks, schedule, a pomodoro timer, and progress tracking — in a single fast, beautiful, **zero-install** web app.
+### Your all-in-one learning ecosystem for students
 
-## Features
+**[🚀 Live Demo](https://cmatt11.github.io/learnio/)** · Notes · Flashcards · PDF Lessons · Planner · Pomodoro
 
-- **Dashboard** — at-a-glance view of today's tasks, classes, due flashcards, study streak and weekly chart
-- **Subjects** — organize everything by class with custom colors
-- **Notes** — markdown editor with live preview, organized by subject, instant search
-- **Flashcards** — create decks and study with **SM-2 spaced repetition** (Again / Hard / Good / Easy)
-- **Tasks** — assignments and to-dos with due dates, priority, subject tags, grouped by Overdue / Today / This week / Later
-- **Schedule** — weekly timetable with click-to-add, color-coded by subject
-- **Pomodoro** — focus timer with customizable intervals, automatic break cycling, and study session logging
-- **Stats** — 30-day study heatmap, time-by-subject breakdown, streaks
-- **Dark mode** — light / dark / system
-- **Local-first** — all data stored in your browser via `localStorage`. Export/import as JSON anytime.
+![Tech](https://img.shields.io/badge/JavaScript-vanilla%20ES%20modules-f7df1e)
+![Styling](https://img.shields.io/badge/Tailwind%20CSS-CDN-38bdf8)
+![PWA](https://img.shields.io/badge/PWA-installable-5a0fc8)
+![Android](https://img.shields.io/badge/Android-APK%20via%20Capacitor-3ddc84)
+![No build](https://img.shields.io/badge/build%20step-none-success)
 
-## Tech
+</div>
 
-- 100% **vanilla JavaScript** (ES modules) — no build step, no dependencies
-- **Tailwind CSS** via CDN for styling
-- Hash-based router, custom reactive state, simple markdown renderer
-- Works offline once loaded
+---
 
-## Run locally
+Learnio brings together everything a high‑school or college student needs to study smarter — notes, spaced‑repetition flashcards, PDF‑powered lessons, tasks, a class schedule, a smart study planner, a pomodoro timer, and progress analytics — in a single fast, offline‑capable web app that installs to your phone. **All data stays on your device.**
 
-Just serve the folder over HTTP:
+> 🔗 **Live demo:** https://cmatt11.github.io/learnio/
+> 📱 Installs as a PWA on any phone, or as a native Android APK.
+
+## ✨ Features
+
+- **📊 Dashboard** — today's tasks, classes, due flashcards, study streak and a weekly study chart
+- **📚 Subjects** — organize everything by class with custom colors
+- **📝 Notes** — markdown editor with live preview, per‑subject organization, instant search
+- **🃏 Flashcards** — build decks and study with **SM‑2 spaced repetition** (Again / Hard / Good / Easy)
+- **📄 Lessons** — import a **PDF** (or paste text) and Learnio generates a **summary**, answers your **questions**, and builds an auto‑graded **quiz** — with **Casual / Normal / Hard** difficulty. Runs entirely on‑device.
+- **✅ Tasks** — assignments with due dates, priority and subject tags, grouped by Overdue / Today / This week / Later
+- **🗓️ Schedule** — weekly timetable with click‑to‑add, color‑coded by subject
+- **🧠 Smart Planner** — turns your tasks into an optimized day/week study plan with break scheduling
+- **⏱️ Pomodoro** — focus timer with custom intervals, auto break cycling, and study‑session logging
+- **📈 Stats** — 30‑day study heatmap, time‑by‑subject breakdown, streaks
+- **🌙 Dark mode** — light / dark / system
+- **🔒 Local‑first & offline** — all data lives in your browser/device; export & import as JSON anytime
+
+## 🛠️ Tech highlights
+
+- **100% vanilla JavaScript** (ES modules) — a complete SPA with **no framework and no build step**
+- Custom **hash router**, **reactive state store**, and a small **markdown renderer**, all hand‑built
+- **Tailwind CSS** for styling
+- **PWA**: web manifest + **service worker** for offline use and installability
+- **PDF text extraction** in‑browser (pdf.js) plus an **on‑device summarizer, quiz generator, and TF‑IDF question‑answering engine** — no server, no API key
+- **IndexedDB** for storing original PDFs; **localStorage** for app data
+- Packaged to a native **Android APK** with **Capacitor**, with a **GitHub Actions** workflow to build it in CI
+
+## 📸 Screenshots
+
+> _Add a few screenshots here to make the repo pop._ Drop images into a `screenshots/` folder and reference them, e.g.:
+>
+> ```markdown
+> ![Dashboard](screenshots/dashboard.png)
+> ![Lessons](screenshots/lessons.png)
+> ```
+
+## ▶️ Run locally
+
+It's a static site — just serve the folder over HTTP:
 
 ```bash
-# Python
-python3 -m http.server 8000
-
-# Or Node
+# Node
 npx serve .
+
+# or Python
+python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000.
+Then open the printed `http://localhost:…` URL.
 
-> Note: opening `index.html` directly via `file://` won't work because ES modules require an HTTP origin.
+> Opening `index.html` directly via `file://` won't work — ES modules need an HTTP origin.
 
-## Deploy
+## 🌐 Live demo / deploy
 
-This is a fully static site, deploy to anywhere:
+Hosted free on **GitHub Pages**: **https://cmatt11.github.io/learnio/**
 
-- **GitHub Pages** — Settings → Pages → Deploy from `main` branch / root
-- **Vercel** / **Netlify** — drag-and-drop or connect the repo
-- **Any static host** — just upload the files
+To enable it on your own fork: **Settings → Pages → Deploy from a branch → `main` / root**. It also deploys cleanly to Vercel, Netlify, or any static host (the app uses relative paths).
 
-## Install as an app
+## 📱 Install as an app
 
-Learnio is a **PWA (Progressive Web App)** and can also be packaged as a native **Android APK**.
+Learnio is an installable **PWA** and can be packaged as a native **Android APK**.
 
-### On your phone / desktop (PWA — no build needed)
+- **Android (Chrome):** menu ⋮ → **Install app**, or **Settings → Install Learnio** in‑app
+- **iPhone/iPad (Safari):** **Share** → **Add to Home Screen**
+- **Desktop (Chrome/Edge):** click the install icon in the address bar
 
-Open the deployed site and install it:
+For a real `.apk`, the `mobile/` folder wraps the app with [Capacitor](https://capacitorjs.com/). See **[BUILD_APK.md](BUILD_APK.md)** for a step‑by‑step build guide, or **[`mobile/README.md`](mobile/README.md)**.
 
-- **Android (Chrome):** open the menu (⋮) → **Add to Home screen / Install app**, or use **Settings → Install Learnio** inside the app.
-- **iPhone/iPad (Safari):** tap **Share** → **Add to Home Screen**.
-- **Desktop (Chrome/Edge):** click the install icon in the address bar.
+## 🗺️ Roadmap
 
-Once installed it launches full-screen, works **offline**, and stores all data locally on your device.
-
-### As an Android APK (Capacitor)
-
-The `mobile/` folder wraps the app with [Capacitor](https://capacitorjs.com/) to produce a real `.apk` that bundles everything for full offline use. The easiest way is the included GitHub Actions workflow:
-
-1. GitHub repo → **Actions** tab → **Build Android APK** → **Run workflow**
-2. Download the **learnio-debug-apk** artifact when it finishes
-3. Install `app-debug.apk` on your phone
-
-Prefer to build it yourself on your computer? Follow the step-by-step
-[**BUILD_APK.md**](BUILD_APK.md) guide. See also [`mobile/README.md`](mobile/README.md).
-
-## Roadmap (v2 ideas)
-
-- Cloud sync (Supabase) and multi-device support
-- AI features: auto-flashcards from notes, summaries, Q&A tutor
-- LaTeX/math equation rendering in notes
-- Bundle Tailwind locally for 100%-offline-from-first-launch
-- Collaboration: shared decks and study groups
-- Calendar integration
+- Optional "bring your own API key" mode for generative AI summaries/answers
+- Cloud sync and multi‑device support
+- Auto‑generate flashcards from a lesson PDF
+- LaTeX / math equation rendering in notes
+- Fully bundled Tailwind for 100%‑offline‑from‑first‑launch
 - Grade tracker / GPA calculator
 
-## License
+## 📦 Project structure
 
-MIT
+```
+index.html            App shell
+css/app.css           Styles (complements Tailwind)
+js/
+  main.js             Entry, routing, PWA registration
+  router.js           Hash router
+  state.js            Reactive store + localStorage persistence
+  lessons-engine.js   PDF extraction + summary/quiz/Q&A engine
+  lib/idb.js          IndexedDB helper (stores PDFs)
+  components/         Layout, icons, modal
+  views/              Dashboard, Notes, Flashcards, Lessons, Tasks,
+                      Schedule, Planner, Pomodoro, Stats, Settings, Subjects
+mobile/               Capacitor Android wrapper + build scripts
+service-worker.js     Offline caching
+```
+
+## 📄 License
+
+MIT — free to use and learn from.
+
+---
+
+<div align="center">
+Built with vanilla JS, a lot of curiosity, and ☕
+</div>

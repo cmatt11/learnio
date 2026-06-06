@@ -14,6 +14,8 @@ const defaultData = () => ({
   studySessions: [],
   settings: {
     theme: 'system',
+    userName: '',
+    namePrompted: false,
     pomodoro: { work: 25, shortBreak: 5, longBreak: 15, longBreakInterval: 4 },
     planner: { dayStart: '08:00', dayEnd: '21:00', breakEvery: 90, breakLen: 15, defaultDuration: 45 },
     onboarded: false,

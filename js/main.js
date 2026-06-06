@@ -1,8 +1,10 @@
 // Learnio main entry
 
-import { applyTheme, seedIfEmpty, subscribe, getState } from './state.js';
+import { applyTheme, seedIfEmpty, subscribe, getState, update } from './state.js';
 import { route, start, getMatch } from './router.js';
 import { renderLayout, attachLayoutHandlers } from './components/layout.js';
+import { openModal } from './components/modal.js';
+import { escapeHtml } from './utils.js';
 
 import { renderDashboard } from './views/dashboard.js';
 import { renderSubjects, renderSubjectDetail } from './views/subjects.js';
@@ -99,3 +101,45 @@ window.addEventListener('appinstalled', () => {
   window.__learnioInstall.installed = true;
   window.dispatchEvent(new CustomEvent('learnio:installed'));
 });
+
+// First-run: ask the learner's name so greetings can be personalized.
+function maybePromptForName() {
+  const s = getState().settings;
+  if ((s.userName && s.userName.trim()) || s.namePrompted) return;
+
+  openModal({
+    title: 'Welcome to Learnio',
+    size: 'sm',
+    content: `
+      <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
+        Let's make this yours. What should we call you?
+      </p>
+      <input id="onb-name" class="input" type="text" maxlength="40" placeholder="Your name"
+             autocomplete="given-name" autofocus />
+      <p class="text-xs text-slate-400 mt-2">You can change this anytime in Settings.</p>
+    `,
+    footer: `
+      <button class="btn btn-ghost" id="onb-skip">Skip</button>
+      <button class="btn btn-primary" id="onb-save">Continue</button>
+    `,
+    onMount: (wrap, close) => {
+      const input = wrap.querySelector('#onb-name');
+      setTimeout(() => input?.focus(), 50);
+      const save = () => {
+        const name = (input.value || '').trim().slice(0, 40);
+        update((d) => { d.settings.userName = name; d.settings.namePrompted = true; });
+        close();
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
+      };
+      const skip = () => {
+        update((d) => { d.settings.namePrompted = true; });
+        close();
+      };
+      wrap.querySelector('#onb-save').addEventListener('click', save);
+      wrap.querySelector('#onb-skip').addEventListener('click', skip);
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') save(); });
+    },
+  });
+}
+
+maybePromptForName();

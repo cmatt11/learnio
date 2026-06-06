@@ -22,6 +22,14 @@ export function renderSettings() {
       </section>
 
       <section class="card p-5">
+        <h3 class="font-semibold mb-2">Profile</h3>
+        <label class="text-sm text-slate-500 dark:text-slate-400 block mb-1.5">Your name</label>
+        <input id="name-input" class="input max-w-xs" type="text" maxlength="40"
+               placeholder="Your name" value="${escapeHtml(state.settings.userName || '')}" />
+        <p class="text-xs text-slate-400 mt-2">Used to greet you on the dashboard.</p>
+      </section>
+
+      <section class="card p-5">
         <h3 class="font-semibold mb-4">Appearance</h3>
         <div class="grid grid-cols-3 gap-2">
           ${['light', 'dark', 'system'].map((t) => `
@@ -92,6 +100,17 @@ export function renderSettings() {
       });
 
       window.addEventListener('learnio:installready', () => installCard?.classList.remove('hidden'), { once: true });
+
+      // Profile name
+      const nameInput = root.querySelector('#name-input');
+      if (nameInput) {
+        const saveName = () => {
+          const name = (nameInput.value || '').trim().slice(0, 40);
+          update((d) => { d.settings.userName = name; d.settings.namePrompted = true; });
+        };
+        nameInput.addEventListener('change', saveName);
+        nameInput.addEventListener('blur', saveName);
+      }
 
       root.querySelectorAll('.theme-option').forEach((b) => b.addEventListener('click', () => {
         const t = b.dataset.theme;

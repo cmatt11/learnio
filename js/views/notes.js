@@ -120,7 +120,7 @@ export function renderNoteEditor(id, defaultSubjectId) {
               <span>Markdown</span>
               <span id="save-status" class="text-slate-400">${note ? 'Saved' : 'Not saved yet'}</span>
             </div>
-            <textarea id="note-content" class="textarea font-mono text-sm" rows="20" placeholder="# Your note&#10;&#10;Start typing markdown... support for **bold**, *italic*, `code`, [links](url), lists, headings, > quotes, --- rules, and ```code blocks```.">${escapeHtml(initialContent)}</textarea>
+            <textarea id="note-content" class="textarea font-mono text-sm" rows="20" placeholder="# Your note&#10;&#10;Start typing markdown... support for **bold**, *italic*, inline code, [links](url), lists, headings, &gt; quotes, --- rules, and fenced code blocks.">${escapeHtml(initialContent)}</textarea>
           </div>
           <div>
             <div class="text-xs uppercase tracking-wide text-slate-400 mb-1.5">Preview</div>

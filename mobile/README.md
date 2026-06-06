@@ -18,6 +18,21 @@ A GitHub Actions workflow builds the APK for you:
 Pushing a tag like `v1.0.0` also builds the APK and attaches it to a GitHub
 Release automatically.
 
+## One-click build / update (Windows)
+
+After the one-time setup (Node 18+, JDK 17, Android Studio for the SDK), just
+**double-click `build-apk.bat`** in this folder — or run it from a terminal:
+
+```bash
+build-apk.bat
+```
+
+It handles both the first build and every update afterwards: it installs
+dependencies, copies the latest web app, creates the Android project the first
+time (skips it later), regenerates the icon/splash, builds the debug APK, and
+opens the folder it lands in. To ship an update, just re-run it and reinstall
+the new APK over the old app — your data is preserved.
+
 ## Build locally
 
 Requirements: Node 18+, JDK 17, and the Android SDK (e.g. via Android Studio).

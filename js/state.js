@@ -14,6 +14,8 @@ const defaultData = () => ({
   studySessions: [],
   settings: {
     theme: 'system',
+    userName: '',
+    namePrompted: false,
     pomodoro: { work: 25, shortBreak: 5, longBreak: 15, longBreakInterval: 4 },
     onboarded: false,
   },

@@ -54,10 +54,13 @@ export function renderDashboard() {
     return 'Good evening';
   })();
 
+  const firstName = (state.settings.userName || '').trim().split(/\s+/)[0];
+  const who = firstName ? escapeHtml(firstName) : 'there';
+
   const content = `
     <div class="px-4 md:px-8 py-6 max-w-6xl mx-auto space-y-6">
       <section>
-        <h2 class="text-2xl md:text-3xl font-bold mb-1">${greeting}, learner</h2>
+        <h2 class="text-2xl md:text-3xl font-bold mb-1">${greeting}, ${who}</h2>
         <p class="text-sm text-slate-500 dark:text-slate-400">Here's your study overview for today.</p>
       </section>
 
